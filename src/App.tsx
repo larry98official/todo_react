@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import ErrorBoundary from "./pages/views/error/errorPage";
+import {NotFound} from "./pages/views/error/notFound";
+import Home from "./pages/views/firstView/home";
+import {RecoilRoot} from "recoil";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default function App() {
+    return (
+        <div>
+            <ErrorBoundary>
+                <BrowserRouter>
+                    <RecoilRoot>
+                        <Routes>
+                            <Route path="/" element={<Home/>}/>
+                            <Route path="/active" element={<Home/>}/>
+                            <Route path="/completed" element={<Home/>}/>
+                            <Route path="*" element={<NotFound/>}/>
+                        </Routes>
+                    </RecoilRoot>
+                </BrowserRouter>
+            </ErrorBoundary>
+        </div>
+    );
 }
-
-export default App;
